@@ -22,8 +22,8 @@
 
     <color name="white">#FFFFFF</color>
 
-    <color name="primary_text">#FFFF00</color>
-    <color name="secondary_text">#FFFF8D</color>
+    <color name="primary_text">#00000F</color>
+    <color name="secondary_text">#004d40</color>
 
      <!--our detail accent colors -->
     <color name="detail_accent_pane_background">#455A64</color>
