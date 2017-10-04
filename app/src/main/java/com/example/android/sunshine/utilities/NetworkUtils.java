@@ -19,6 +19,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.android.sunshine.BuildConfig;
 import com.example.android.sunshine.data.SunshinePreferences;
 
 import java.io.IOException;
@@ -48,11 +49,9 @@ public final class NetworkUtils {
      * If you'd prefer to test with the weather data that you will see in the videos on Udacity,
      * you can do so by setting the FORECAST_BASE_URL to STATIC_WEATHER_URL below.
      */
-    private static final String DYNAMIC_WEATHER_URL =
-            "https://andfun-weather.udacity.com/weather";
 
     private static final String STATIC_WEATHER_URL =
-            "https://andfun-weather.udacity.com/staticweather";
+            "http://api.openweathermap.org/data/2.5/forecast/daily";
 
     private static final String FORECAST_BASE_URL = STATIC_WEATHER_URL;
 
@@ -68,7 +67,7 @@ public final class NetworkUtils {
     /* The units we want our API to return */
     private static final String units = "metric";
     /* The number of days we want our API to return */
-    private static final int numDays = 14;
+    private static final int numDays = 16;
 
     /* The query parameter allows us to provide a location string to the API */
     private static final String QUERY_PARAM = "q";
@@ -82,6 +81,8 @@ public final class NetworkUtils {
     private static final String UNITS_PARAM = "units";
     /* The days parameter allows us to designate how many days of weather data we want */
     private static final String DAYS_PARAM = "cnt";
+    /* The API paramter allows us to designate our API key to the weather request */
+    private static final String API_PARAM = "APPID";
 
     /**
      * Retrieves the proper URL to query for the weather data. The reason for both this method as
@@ -124,6 +125,7 @@ public final class NetworkUtils {
                 .appendQueryParameter(FORMAT_PARAM, format)
                 .appendQueryParameter(UNITS_PARAM, units)
                 .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
+                .appendQueryParameter(API_PARAM, BuildConfig.WEATHER_API_TOKEN)
                 .build();
 
         try {
@@ -149,6 +151,7 @@ public final class NetworkUtils {
                 .appendQueryParameter(FORMAT_PARAM, format)
                 .appendQueryParameter(UNITS_PARAM, units)
                 .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
+                .appendQueryParameter(API_PARAM, BuildConfig.WEATHER_API_TOKEN)
                 .build();
 
         try {
