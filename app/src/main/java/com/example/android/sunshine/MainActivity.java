@@ -19,9 +19,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,7 +32,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.data.WeatherContract;
@@ -264,11 +268,17 @@ public class MainActivity extends AppCompatActivity implements
      * @see WeatherContract.WeatherEntry#COLUMN_DATE
      */
     @Override
-    public void onClick(long date) {
+    public void onClick(long date, ImageView iconView, TextView dateView, TextView descriptionView, TextView highTempView, TextView lowTempView) {
         Intent weatherDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
         Uri uriForDateClicked = WeatherContract.WeatherEntry.buildWeatherUriWithDate(date);
         weatherDetailIntent.setData(uriForDateClicked);
-        startActivity(weatherDetailIntent);
+        Pair<View, String> p1 = Pair.create((View)iconView, "iconTransition");
+        Pair<View, String> p2 = Pair.create((View) dateView, "dateTransition");
+        Pair<View, String> p3 = Pair.create((View) descriptionView, "descriptionTransition");
+        Pair<View, String> p4 = Pair.create((View) highTempView, "highTransition");
+        Pair<View, String> p5 = Pair.create((View) lowTempView, "lowTransition");
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2, p3, p4, p5);
+        startActivity(weatherDetailIntent, options.toBundle());
     }
 
     /**
