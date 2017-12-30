@@ -1,2 +1,2 @@
 # Sunshine
-A Material Design weather app.
+A Material Design weather app, with notifications for weather alerts.
