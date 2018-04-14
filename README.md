@@ -1,2 +1,2 @@
-# Sunshine
+# DawnDusk
 A Material Design weather app, with notifications for weather alerts.
